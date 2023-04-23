@@ -1,0 +1,64 @@
+{
+  "name": "homeowner-toolkit",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/homeowner-toolkit/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/homeowner-toolkit",
+        "main": "apps/homeowner-toolkit/src/main.ts",
+        "tsConfig": "apps/homeowner-toolkit/tsconfig.app.json",
+        "assets": ["apps/homeowner-toolkit/src/assets"],
+        "isolatedConfig": true,
+        "webpackConfig": "apps/homeowner-toolkit/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "homeowner-toolkit:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "homeowner-toolkit:build:development"
+        },
+        "production": {
+          "buildTarget": "homeowner-toolkit:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/homeowner-toolkit/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/homeowner-toolkit/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": []
+}
