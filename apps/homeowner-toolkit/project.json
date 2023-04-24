@@ -58,6 +58,30 @@
           "codeCoverage": true
         }
       }
+    },
+    "docker": {
+      "executor": "@nx-tools/nx-container:build",
+      "options": {
+        "push": true,
+        "metadata": {
+          "images": ["localhost:6000/homeowner-toolkit"],
+          "tags": ["type=sha", "latest"]
+        }
+      }
+    },
+    "docker-release": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "docker pull localhost:6000/homeowner-toolkit:sha-b14e30b",
+            "forwardAllArgs": false
+          },
+          "docker tag localhost:6000/homeowner-toolkit:sha-b14e30b localhost:6000/homeowner-toolkit:v{args.tag}",
+          "docker push localhost:6000/homeowner-toolkit:v{args.tag}"
+        ],
+        "parallel": false
+      }
     }
   },
   "tags": []
