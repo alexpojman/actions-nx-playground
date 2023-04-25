@@ -6,7 +6,8 @@
     "build:all": "yarn nx run-many -t build",
     "docker:base": "docker build . -f Dockerfile.base -t homeowners-tk:latest",
     "nx": "npx nx",
-    "release": "yarn release-it"
+    "release": "yarn release-it",
+    "release:major": "yarn release-it major --only-version"
   },
   "private": true,
   "dependencies": {
