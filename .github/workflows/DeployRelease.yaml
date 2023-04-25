@@ -23,10 +23,10 @@ jobs:
       - name: Yarn install
         run: yarn install --frozen-lockfile
       
-      - name: Build
+      - name: Docker Release
         uses: mansagroup/nrwl-nx-action@v3
         with:
-          targets: build
+          targets: docker-release
           all: 'true'
           parallel: 3
 
