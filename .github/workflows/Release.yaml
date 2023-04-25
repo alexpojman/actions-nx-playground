@@ -14,13 +14,8 @@ on:
           - patch
 
 jobs:
-    hello:
-      runs-on: ubuntu-latest
-      steps:
-      - name: Hello Step
-        run: echo "Hello ${{ github.event.inputs.name }}"
-
     release:
+      name: Generate and Create Release
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v3
@@ -32,7 +27,11 @@ jobs:
             git config user.name "${GITHUB_ACTOR}"
             git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
-        - run: yarn install
+        - name: Setup Node.js
+          uses: actions/setup-node@v3
+          with:
+            node-version: '18'
+            cache: 'yarn'
 
         - run: yarn release ${{ inputs.release_type }} --ci
           env:
