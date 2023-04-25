@@ -35,7 +35,6 @@ jobs:
             cache: 'yarn'
 
         - name: Yarn install
-          if: steps.setup-node.outputs.cache-hit != 'true'
           run: yarn install --frozen-lockfile
 
         - name: Release It
