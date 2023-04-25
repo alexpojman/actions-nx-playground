@@ -49,7 +49,8 @@
   "release-it": {
     "github": {
       "release": true,
-      "autoGenerate": true
+      "autoGenerate": true,
+      "releaseName": "Release v${version}"
     },
     "git": {
       "commit": false,
