@@ -28,11 +28,17 @@ jobs:
             git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
         - name: Setup Node.js
+          id: setup-node
           uses: actions/setup-node@v3
           with:
             node-version: '18'
             cache: 'yarn'
-        - run: yarn install --frozen-lockfile
-        - run: yarn release ${{ inputs.release_type }} --ci
+
+        - name: Yarn install
+          if: steps.setup-node.outputs.cache-hit != 'true'
+          run: yarn install --frozen-lockfile
+
+        - name: Release It
+          run: yarn release ${{ inputs.release_type }} --ci
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
