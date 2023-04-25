@@ -53,7 +53,8 @@
     },
     "git": {
       "commit": false,
-      "push": true
+      "push": true,
+      "tagName": "v${version}"
     },
     "npm": false
   }
