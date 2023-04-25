@@ -3,9 +3,15 @@ name: Create Release
 on:
   workflow_dispatch:
     inputs:
-      name:
-        description: "Test"
-        default: "Test"
+      release_type:
+        description: 'Release Type'
+        required: true
+        default: 'minor'
+        type: choice
+        options:
+          - major
+          - minor
+          - patch
 
 jobs:
     hello:
@@ -17,7 +23,7 @@ jobs:
     release:
       runs-on: ubuntu-latest
       steps:
-        - uses: actions/checkout@v2
+        - uses: actions/checkout@v3
           with:
             fetch-depth: 0
 
@@ -28,6 +34,6 @@ jobs:
 
         - run: yarn install
 
-        - run: yarn release minor --ci
+        - run: yarn release ${{ inputs.release_type }} --ci
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
