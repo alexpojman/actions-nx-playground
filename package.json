@@ -5,7 +5,8 @@
   "scripts": {
     "build:all": "yarn nx run-many -t build",
     "docker:base": "docker build . -f Dockerfile.base -t homeowners-tk:latest",
-    "nx": "npx nx"
+    "nx": "npx nx",
+    "release": "yarn release-it"
   },
   "private": true,
   "dependencies": {
@@ -52,7 +53,7 @@
     },
     "git": {
       "commit": false,
-      "push": false
+      "push": true
     },
     "npm": false
   }

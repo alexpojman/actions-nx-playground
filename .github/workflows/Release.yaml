@@ -9,7 +9,25 @@ on:
 
 jobs:
     hello:
-        runs-on: ubuntu-latest
-        steps:
-        - name: Hello Step
-          run: echo "Hello ${{ github.event.inputs.name }}"
+      runs-on: ubuntu-latest
+      steps:
+      - name: Hello Step
+        run: echo "Hello ${{ github.event.inputs.name }}"
+
+    release:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+
+        - name: git config
+          run: |
+            git config user.name "${GITHUB_ACTOR}"
+            git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+
+        - run: yarn install
+
+        - run: yarn release minor
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
