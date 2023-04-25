@@ -32,7 +32,7 @@ jobs:
           with:
             node-version: '18'
             cache: 'yarn'
-
+        - run: yarn install --frozen-lockfile
         - run: yarn release ${{ inputs.release_type }} --ci
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
