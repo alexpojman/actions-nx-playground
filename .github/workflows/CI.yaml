@@ -1,0 +1,11 @@
+name: Run tests
+
+on: [push]
+
+jobs:  
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Do something
+      run: echo "Hello world"
