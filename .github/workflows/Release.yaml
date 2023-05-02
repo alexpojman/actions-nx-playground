@@ -49,7 +49,7 @@ jobs:
         - name: Release It
           run: |
             if [[ "${{ inputs.skip_test }}" == "true" ]]; then
-             yarn release ${{ inputs.release_type }} --git.tagName="${version}-hotfix-${{ inputs.target_branch }}" --github.releaseName="[Hotfix ${{ inputs.target_branch }}] Release ${version}" --ci
+             yarn release ${{ inputs.release_type }} '--git.tagName="${version}-hotfix-${{ inputs.target_branch }}"' '--github.releaseName="[Hotfix ${{ inputs.target_branch }}] Release ${version}"' --ci
             else
               yarn release ${{ inputs.release_type }} --ci
             fi
