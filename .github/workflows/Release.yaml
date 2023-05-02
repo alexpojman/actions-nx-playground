@@ -12,6 +12,15 @@ on:
           - major
           - minor
           - patch
+      skip_test:
+        description: 'Skip Test environments (open UAT PR)'
+        required: false
+        default: false
+        type: boolean
+      target_branch:
+        description: 'Release Branch to Target (e.g. v4.1)'
+        required: false
+        type: string
 
 jobs:
     release:
@@ -38,6 +47,11 @@ jobs:
           run: yarn install --frozen-lockfile
 
         - name: Release It
-          run: yarn release ${{ inputs.release_type }} --ci
+          run: |
+            if [[ "${{ inputs.skip_test }}" == "true" ]]; then
+             yarn release ${{ inputs.release_type }} --git.tagName="${version}-hotfix-${{ inputs.target_branch }}" --github.releaseName="[Hotfix ${{ inputs.target_branch }}] Release ${version}" --ci
+            else
+              yarn release ${{ inputs.release_type }} --ci
+            fi
           env:
             GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
