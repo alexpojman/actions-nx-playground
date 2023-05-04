@@ -1,6 +1,6 @@
 {
   "name": "my-workspace",
-  "version": "3.9.0",
+  "version": "3.8.0",
   "license": "MIT",
   "scripts": {
     "build:all": "yarn nx run-many -t build",
@@ -54,10 +54,11 @@
       "releaseName": "Release v${version}"
     },
     "git": {
-      "commit": true,
+      "commit": false,
       "push": true,
       "commitMessage": "[skip ci]: Release v${version}",
-      "tagName": "v${version}"
+      "tagName": "v${version}",
+      "tagExclude": "*[-]*"
     },
     "npm": {
       "publish": false
