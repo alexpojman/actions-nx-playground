@@ -56,9 +56,6 @@
     "git": {
       "commit": true,
       "push": true,
-      "pushArgs": [
-        "--no-follow-tags"
-      ],
       "commitMessage": "[skip ci]: Release v${version}",
       "tagName": "v${version}"
     },

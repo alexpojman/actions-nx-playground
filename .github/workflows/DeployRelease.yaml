@@ -19,6 +19,15 @@ jobs:
         id: get_commit_sha
         run: echo "sha=sha-$(git rev-parse --short=7 HEAD~)" >> $GITHUB_OUTPUT
 
+      - name: Get target branch
+        id: get-target-branch
+        if: contains(github.event.release.name, '[hotfix-')
+        run: echo "target-branch=$(echo ${{ github.event.release.name }} | cut -d'-' -f2 | sed 's/]//')" >> $GITHUB_OUTPUT
+
+      - name: Print output
+        run: |
+          echo ${{ steps.get-target-branch.outputs.target-branch}}
+
       - name: Setup Node.js
         id: setup-node
         uses: actions/setup-node@v3
