@@ -1,0 +1,30 @@
+name: Deploy Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_environment:
+        description: 'Target Environment Branch (mastermind-release)'
+        required: true
+        default: 'internal-test'
+        type: choice
+        options:
+          - internal-test
+          - v4.1
+          - v4.2
+
+jobs:
+  validate-inputs:
+    name: Validate Inputs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate Input Ref
+        run: |
+          echo "Validating input ref: ${{ github.ref }}..."
+          if [[ ${{ github.ref }} =~ ^refs/tags/v([0-9]+\.){2}(\*|[0-9]+)(-.*)?$ ]]; then
+            echo "Ref ${{ github.ref }} validated successfully!"
+          else
+            echo "Invalid ref: ${{ github.ref }}"
+            exit 1
+          fi
+
