@@ -60,8 +60,6 @@
       "tagName": "v${version}",
       "tagExclude": "*[-]*"
     },
-    "npm": {
-      "publish": false
-    }
+    "npm": false
   }
 }
