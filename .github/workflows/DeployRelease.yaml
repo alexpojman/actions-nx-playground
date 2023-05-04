@@ -2,7 +2,7 @@ name: Deploy Release
 
 on:
   release:
-    types: [created]
+    types: [published]
 
 # TODO: Check if hotfix is in the tag name
 # Get the target branch from there
@@ -17,7 +17,7 @@ jobs:
 
       - name: Get commit SHA for release
         id: get_commit_sha
-        run: echo name=sha-$(git rev-parse HEAD~)
+        run: echo "sha=sha-$(git rev-parse --short=7 HEAD~)" >> $GITHUB_OUTPUT
 
       - name: Setup Node.js
         id: setup-node

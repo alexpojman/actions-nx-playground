@@ -31,6 +31,8 @@ jobs:
           with:
             fetch-depth: 0
 
+        # Let's validate that a docker image exists for this tag first - a "nice to have"
+
         - name: git config
           run: |
             git config user.name "${GITHUB_ACTOR}"
