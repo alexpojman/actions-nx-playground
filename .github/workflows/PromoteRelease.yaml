@@ -1,10 +1,10 @@
-name: Deploy Release
+name: Promote Release
 
 on:
   workflow_dispatch:
     inputs:
       target_environment:
-        description: 'Target Environment Branch (mastermind-release)'
+        description: 'Target Environment/Branch (mastermind-release)'
         required: true
         default: 'internal-test'
         type: choice
