@@ -16,7 +16,7 @@ jobs:
           fetch-depth: 0
 
       - name: Get commit SHA for release
-        id: get_commit_sha
+        id: get-commit-sha
         run: echo "sha=sha-$(git rev-parse --short=7 HEAD~)" >> $GITHUB_OUTPUT
 
       - name: Get target branch
@@ -26,7 +26,11 @@ jobs:
 
       - name: Print output
         run: |
+          echo "### We are printing outputs here! :rocket:" >> $GITHUB_STEP_SUMMARY
+          echo "## Target Branch" >> $GITHUB_STEP_SUMMARY
           echo ${{ steps.get-target-branch.outputs.target-branch}}
+          echo "## SHA we are targeting" >> $GITHUB_STEP_SUMMARY
+          echo ${{ steps.get-commit-sha.outputs.sha}}
 
       - name: Setup Node.js
         id: setup-node
