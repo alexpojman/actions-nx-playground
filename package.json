@@ -54,13 +54,11 @@
       "releaseName": "Release v${version}"
     },
     "git": {
-      "commit": true,
+      "commit": false,
       "push": true,
       "commitMessage": "[skip ci]: Release v${version}",
       "tagName": "v${version}"
     },
-    "npm": {
-      "publish": false
-    }
+    "npm": false
   }
 }
