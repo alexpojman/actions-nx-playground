@@ -31,6 +31,10 @@ jobs:
           with:
             fetch-depth: 0
 
+        - uses: pnpm/action-setup@v2
+          with:
+            version: 8
+
         # Let's validate that a docker image exists for this tag first - a "nice to have"
 
         - name: git config
@@ -43,17 +47,17 @@ jobs:
           uses: actions/setup-node@v3
           with:
             node-version: '18'
-            cache: 'yarn'
+            cache: 'pnpm'
 
-        - name: Yarn install
-          run: yarn install --frozen-lockfile
+        - name: Install dependencies
+          run: pnpm install
 
         - name: Release It
           run: |
             if [[ "${{ inputs.skip_test }}" == "true"  ]]; then
-              yarn release ${{ inputs.release_type }} 'git.commitMessage="[skip ci]: Hotfix Release v${version}"' '--github.releaseName="Release v${version} [hotfix-${{ inputs.target_branch }}]"' --ci
+              pnpm release ${{ inputs.release_type }} 'git.commitMessage="[skip ci]: Hotfix Release v${version}"' '--github.releaseName="Release v${version} [hotfix-${{ inputs.target_branch }}]"' --ci
             else
-              yarn release ${{ inputs.release_type }} --ci
+              pnpm release ${{ inputs.release_type }} --ci
             fi
           env:
             GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
