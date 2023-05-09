@@ -3,11 +3,12 @@
   "version": "3.8.0",
   "license": "MIT",
   "scripts": {
-    "build:all": "yarn nx run-many -t build",
+    "build:all": "pnpm nx run-many -t build",
     "docker:base": "docker build . -f Dockerfile.base -t homeowners-tk:latest",
     "nx": "npx nx",
-    "release": "yarn release-it",
-    "release:major": "yarn release-it major --only-version"
+    "preinstall": "npx only-allow pnpm", 
+    "release": "pnpm release-it",
+    "release:major": "pnpm release-it major --only-version"
   },
   "private": true,
   "dependencies": {
